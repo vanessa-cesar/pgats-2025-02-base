@@ -25,7 +25,8 @@ Acesse o Swagger em: http://localhost:3000/api-docs
 
 
 ## Testes de Performance com K6
-Os testes foram desenhados para exercitar os fluxos de autenticação e finalização de compra, aplicando os seguintes conceitos técnicos:
+Os testes foram desenhados para exercitar os fluxos de autenticação e finalização de compra,
+aplicando os seguintes conceitos técnicos:
 
 ## Stages & Thresholds
 Configuramos o teste com ramping de usuários e metas de performance (SLA).
