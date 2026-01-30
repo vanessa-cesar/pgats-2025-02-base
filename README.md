@@ -5,17 +5,16 @@ Este repositório contém a implementação de testes de performance utilizando 
 
 A estrutura do projeto de testes de performance está organizada da seguinte forma:
 
+```text
 tests/k6/
 ├── data/
 │   └── users.json          # Massa de dados para Data-Driven Testing
 ├── helpers/
-│   ├── baseURL.js          # Helper para definição da URL base
-│   └── dadosLogin.js       # Helper para dados de autenticação
+│   ├── baseURL.js          # Definição da URL base
+│   └── dadosLogin.js       # Dados de autenticação
 ├── performance.test.js     # Script principal de testes K6
 └── summary.html            # Relatório HTML de execução
 
-
-## Instalação e Execução da API
 
 # Instalar dependências
 npm install
@@ -31,6 +30,7 @@ Os testes foram desenhados para exercitar os fluxos de autenticação e finaliza
 ## Stages & Thresholds
 Configuramos o teste com ramping de usuários e metas de performance (SLA).
 
+```js
 export const options = {
   stages: [
     { duration: '30s', target: 10 }, // Ramp-up
@@ -61,6 +61,7 @@ Token JWT: O token gerado no login é capturado dinamicamente e reutilizado no h
 let token = loginRes.json('token');
 
 // Uso no checkout
+```js
 const params = {
   headers: { 'Authorization': `Bearer ${token}` },
 };
@@ -74,6 +75,7 @@ JavaScript
 token = loginRes.json('token');
 
 // Uso no checkout
+```js
 const params = {
   headers: { 'Authorization': `Bearer ${token}` },
 };
@@ -82,6 +84,7 @@ const params = {
 Implementamos verificações de status code e métricas customizadas para o checkout.
 
 JavaScript
+```js
 const checkoutDuration = new Trend('checkout_duration'); // Trend
 
 check(res, { 'Checkout concluído': (r) => r.status === 201 }); // Check
