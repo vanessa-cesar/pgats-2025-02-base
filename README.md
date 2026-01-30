@@ -16,10 +16,14 @@ tests/k6/
 
 
 ## Instalação e Execução da API
-Bash
+
+# Instalar dependências
 npm install
+
+# Iniciar o servidor
 node rest/server.js
 Acesse o Swagger em: http://localhost:3000/api-docs
+
 
 ## Testes de Performance com K6
 Os testes foram desenhados para exercitar os fluxos de autenticação e finalização de compra, aplicando os seguintes conceitos técnicos:
@@ -27,7 +31,6 @@ Os testes foram desenhados para exercitar os fluxos de autenticação e finaliza
 ## Stages & Thresholds
 Configuramos o teste com ramping de usuários e metas de performance (SLA).
 
-JavaScript
 export const options = {
   stages: [
     { duration: '30s', target: 10 }, // Ramp-up
@@ -43,22 +46,24 @@ export const options = {
 ## Data-Driven Testing (SharedArray)
 Utilizamos o SharedArray para carregar a massa de dados de usuários de um arquivo JSON externo.
 
-JavaScript
 const users = new SharedArray('usuarios', function () {
   return JSON.parse(open('./data/users.json'));
 });
 
 ### Helpers
 
-Os helpers foram implementados no diretório `tests/k6/helpers` com o objetivo de reutilizar código e manter o script principal mais limpo.
+Os helpers em tests/k6/helpers permitem reutilizar código e manter o script principal limpo.
+Base URL: O helper baseURL.js permite obter dinamicamente a URL da API.
+Token JWT: O token gerado no login é capturado dinamicamente e reutilizado no header do checkout.
 
-Exemplo do helper `baseURL.js`:
 
-export function getBaseURL() {
-  return __ENV.BASE_URL || 'http://localhost:3000';
+// Captura do token
+let token = loginRes.json('token');
 
-}
-Este helper é utilizado no arquivo `tests/k6/performance.test.js` para obter dinamicamente a URL base da API durante a execução dos testes.
+// Uso no checkout
+const params = {
+  headers: { 'Authorization': `Bearer ${token}` },
+};
 
 
 ### Reaproveitamento de Resposta & Token JWT
