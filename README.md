@@ -99,7 +99,8 @@ const BASE_URL = __ENV.BASE_URL; // Variável de Ambiente
 
 ### Faker / Massa Dinâmica
 
-Foi utilizado o conceito de Faker para simular dados dinâmicos durante a execução do teste, evitando dados estáticos e garantindo maior realismo na carga aplicada.
+Foi utilizado o conceito de Faker para simular dados dinâmicos durante a execução do teste,
+evitando dados estáticos e garantindo maior realismo na carga aplicada.
 
 Exemplo de uso:
 
@@ -107,7 +108,8 @@ const quantity = Math.floor(Math.random() * 5) + 1;
 
 ## Relatório de Execução
 
-O relatório HTML é gerado automaticamente ao final da execução e salvo na raiz do projeto com o nome `summary.html`.
+O relatório HTML é gerado automaticamente ao final da execução e salvo na raiz do projeto
+com o nome `summary.html`.
 
 ## Como rodar os testes
 Certifique-se de que a API REST está rodando e execute:
